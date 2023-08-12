@@ -1,0 +1,8 @@
+ li {
+    padding-top: 90px;
+}
+li > a{
+    text-decoration: none;
+    color: white;
+    font-size: 25px;
+}
