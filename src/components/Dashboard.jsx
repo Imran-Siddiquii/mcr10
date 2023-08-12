@@ -11,8 +11,8 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Dashboard = () => {
-   const {data}=useSelector((state)=>state.dataList) 
-  const summary = data.reduce(
+  const { data } = useSelector((state) => state.dataList);
+  const summary = data?.reduce(
     (accumulator, item) => {
       accumulator.totalStock += item.stock;
       accumulator.totalDelivered += item.delivered;
@@ -26,9 +26,17 @@ const Dashboard = () => {
     { totalStock: 0, totalDelivered: 0, lowStockItems: [] }
   );
   const resultArray = [
-    { item: "Total Stock", value: summary.totalStock,color:'green' },
-    { item: "Total Delivered", value: summary.totalDelivered,color:"yellow" },
-    { item: "Low Stock Count", value: summary.lowStockItems.length,color:"red" },
+    { item: "Total Stock", value: summary?.totalStock, color: "green" },
+    {
+      item: "Total Delivered",
+      value: summary?.totalDelivered,
+      color: "yellow",
+    },
+    {
+      item: "Low Stock Count",
+      value: summary?.lowStockItems.length,
+      color: "red",
+    },
   ];
   return (
     <div>
@@ -41,12 +49,9 @@ const Dashboard = () => {
           {resultArray.map((item, index) => (
             <Grid item xs={4} sm={4} md={4} key={index}>
               <Item>
-              <h2 style={{color:`${item.color}`}}>
-              {item.value}
-              </h2>
-             <h4>
-             {item.item}
-             </h4></Item>
+                <h2 style={{ color: `${item.color}` }}>{item.value}</h2>
+                <h4>{item.item}</h4>
+              </Item>
             </Grid>
           ))}
         </Grid>
